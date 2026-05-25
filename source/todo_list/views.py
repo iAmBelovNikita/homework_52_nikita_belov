@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
-from .models import TodoTask
+from .models import TodoTask, status_choices
 
 
 # Create your views here.
@@ -12,7 +12,7 @@ def todo_list(request):
 
 def task_create(request):
     if request.method == 'GET':
-        return render(request, 'task_create.html')
+        return render(request, 'task_create.html', {'status_choices': status_choices})
     elif request.method == 'POST':
         TodoTask.objects.create(
             description = request.POST.get('description'),
