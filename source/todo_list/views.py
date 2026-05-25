@@ -17,6 +17,12 @@ def task_create(request):
         TodoTask.objects.create(
             description = request.POST.get('description'),
             status = request.POST.get('status'),
-            finish_date = request.POST.get('finish_date')
+            finish_date = request.POST.get('finish_date') or None
         )
+        return HttpResponseRedirect('/')
+
+def task_delete(request):
+    if request.method == 'GET':
+        task_id = request.GET.get('id')
+        TodoTask.objects.filter(id=task_id).delete()
         return HttpResponseRedirect('/')
