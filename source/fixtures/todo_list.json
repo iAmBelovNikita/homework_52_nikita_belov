@@ -3,7 +3,8 @@
     "model": "todo_list.todotask",
     "pk": 1,
     "fields": {
-        "description": "Clean your dog",
+        "title": "Clean your dog",
+        "description": "I really hate this action",
         "status": "new",
         "finish_date": "2026-05-26",
         "created_at": "2026-05-25T09:00:45.108Z",
@@ -14,7 +15,8 @@
     "model": "todo_list.todotask",
     "pk": 2,
     "fields": {
-        "description": "Clean yourself",
+        "title": "Clean yourself",
+        "description": "I really like this action",
         "status": "new",
         "finish_date": "2026-05-13",
         "created_at": "2026-05-25T10:28:01.400Z",
@@ -25,7 +27,8 @@
     "model": "todo_list.todotask",
     "pk": 3,
     "fields": {
-        "description": "Walk with your dog",
+        "title": "Walk with your dog",
+        "description": "Meh",
         "status": "in_progress",
         "finish_date": "2026-05-26",
         "created_at": "2026-05-25T10:50:26.693Z",

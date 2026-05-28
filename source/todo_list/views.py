@@ -14,11 +14,21 @@ def task_create(request):
     if request.method == 'GET':
         return render(request, 'task_create.html', {'status_choices': status_choices})
     elif request.method == 'POST':
+        title = request.POST.get('title', '').strip()
+        description = request.POST.get('description', '').strip()
+        status = request.POST.get('status')
+        finish_date = request.POST.get('finish_date') or None
+
+        if not title:
+            return render(request, 'task_create.html', {'status_choices': status_choices, 'error': 'Title cannot be empty'})
+
         TodoTask.objects.create(
-            description = request.POST.get('description'),
-            status = request.POST.get('status'),
-            finish_date = request.POST.get('finish_date') or None
+            title = title,
+            description = description,
+            status = status,
+            finish_date = finish_date
         )
+
         return HttpResponseRedirect('/')
 
 def task_delete(request):
