@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from .models import TodoTask, status_choices
 
@@ -9,6 +9,10 @@ from .models import TodoTask, status_choices
 def todo_list(request):
     tasks = TodoTask.objects.all()
     return render(request, 'index.html', {'tasks': tasks})
+
+def task_about(request, pk):
+    task = get_object_or_404(TodoTask, pk=pk)
+    return render(request, 'task_about.html', {'task': task})
 
 def task_create(request):
     if request.method == 'GET':

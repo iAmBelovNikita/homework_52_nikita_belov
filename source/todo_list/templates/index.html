@@ -35,9 +35,15 @@
                   {% endif %}
                 </small>
               </p>
-              <a href="{% url 'task_delete' %}?id={{ task.id }}" class="btn btn-danger">
-                Remove
-              </a>
+              <div class="d-flex gap-2">
+                <a href="{% url 'task_about' task.pk %}" class="btn btn-outline-primary">
+                  Details
+                </a>
+
+                <a href="{% url 'task_delete' %}?id={{ task.id }}" class="btn btn-danger">
+                  Remove
+                </a>
+              </div>
             </div>
           </div>
         </div>
