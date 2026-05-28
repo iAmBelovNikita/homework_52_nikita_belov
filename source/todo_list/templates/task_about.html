@@ -1,49 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>{{ task.title }}</title>
+{% extends "base.html" %}
+{% block nav %}
+<div class="d-flex gap-2 mt-4">
+  <a href="{% url 'todo_list' %}" class="btn btn-secondary">
+    Back to list
+  </a>
+  <a href="{% url 'task_create' %}" class="btn btn-primary">
+    Create Task
+  </a>
+</div>
+{% endblock %}
+{% block content %}
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h1 class="card-title mb-3">{{ task.title }}</h1>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+      <p class="card-text">
+        <strong>Status:</strong> {{ task.get_status_display }}
+      </p>
 
-  <div class="container mt-5">
-    <div class="card shadow-sm">
-      <div class="card-body">
-        <h1 class="card-title mb-3">{{ task.title }}</h1>
-
-        <p class="card-text">
-          <strong>Status:</strong> {{ task.get_status_display }}
-        </p>
-
-        <p class="card-text">
-          <strong>Description:</strong>
+      <p class="card-text">
+        <strong>Description:</strong>
+        {% if task.description %}
           {{ task.description }}
-        </p>
+        {% else %}
+          --//--
+        {% endif %}
+      </p>
 
-        <p class="card-text">
-          <strong>Finish date:</strong>
-          {% if task.finish_date %}
-            {{ task.finish_date }}
-          {% else %}
-            no date
-          {% endif %}
-        </p>
+      <p class="card-text">
+        <strong>Finish date:</strong>
+        {% if task.finish_date %}
+          {{ task.finish_date }}
+        {% else %}
+          --//--
+        {% endif %}
+      </p>
 
-        <div class="d-flex gap-2 mt-4">
-          <a href="{% url 'todo_list' %}" class="btn btn-secondary">
-            Back to list
-          </a>
-
-          <a href="{% url 'task_delete' %}?id={{ task.id }}" class="btn btn-danger">
-            Remove
-          </a>
-        </div>
+      <div class="d-flex gap-2 mt-4">
+        <a href="{% url 'task_delete' task.pk %}" class="btn btn-danger">
+          Remove
+        </a>
       </div>
     </div>
   </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+{% endblock %}

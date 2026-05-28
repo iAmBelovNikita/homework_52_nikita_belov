@@ -1,5 +1,4 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from .models import TodoTask, status_choices
 
@@ -33,10 +32,10 @@ def task_create(request):
             finish_date = finish_date
         )
 
-        return HttpResponseRedirect('/')
+        return redirect('todo_list')
 
-def task_delete(request):
+def task_delete(request, pk):
     if request.method == 'GET':
-        task_id = request.GET.get('id')
-        TodoTask.objects.filter(id=task_id).delete()
-        return HttpResponseRedirect('/')
+        task = get_object_or_404(TodoTask, pk=pk)
+        task.delete()
+        return redirect('todo_list')
