@@ -76,7 +76,8 @@ def task_update(request, pk):
         return render(request, 'task_update.html', context)
 
 def task_delete(request, pk):
-    if request.method == 'GET':
+    if request.method == 'POST':
         task = get_object_or_404(TodoTask, pk=pk)
         task.delete()
-        return redirect('todo_list')
+
+    return redirect('todo_list')

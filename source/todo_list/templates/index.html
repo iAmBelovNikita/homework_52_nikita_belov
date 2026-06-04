@@ -31,12 +31,13 @@
                 Details
               </a>
 
-              <a href="{% url 'task_delete' task.pk %}" class="btn btn-danger">
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#task-{{ task.pk }}-Modal">
                 Remove
-              </a>
+              </button>
             </div>
           </div>
         </div>
+        {% include 'partial/task_delete_modal.html' with task=task %}
       </div>
     {% empty %}
       <p>No tasks</p>
