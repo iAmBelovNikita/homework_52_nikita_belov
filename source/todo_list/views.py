@@ -40,6 +40,40 @@ def task_create(request):
         }
         return render(request, 'task_create.html', context)
 
+def task_update(request, pk):
+    task = get_object_or_404(TodoTask, pk=pk)
+
+    form = TaskForm(initial={
+        'title': task.title,
+        'description': task.description,
+        'status': task.status,
+        'finish_date': task.finish_date,
+    })
+
+    if request.method == 'GET':
+        context = {
+            'form': form,
+            'task': task,
+        }
+        return render(request, 'task_update.html', context)
+
+    elif request.method == 'POST':
+        form = TaskForm(request.POST)
+
+        if form.is_valid():
+            task.title = form.cleaned_data.get('title')
+            task.description = form.cleaned_data.get('description')
+            task.status = form.cleaned_data.get('status')
+            task.finish_date = form.cleaned_data.get('finish_date')
+            task.save()
+
+            return redirect('task_about', pk=task.pk)
+
+        context = {
+            'form': form,
+            'task': task,
+        }
+        return render(request, 'task_update.html', context)
 
 def task_delete(request, pk):
     if request.method == 'GET':

@@ -37,6 +37,9 @@
       </p>
 
       <div class="d-flex gap-2 mt-4">
+        <a href="{% url 'task_update' task.pk %}" class="btn btn-success">
+          Update
+        </a>
         <a href="{% url 'task_delete' task.pk %}" class="btn btn-danger">
           Remove
         </a>
